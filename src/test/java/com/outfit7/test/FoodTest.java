@@ -28,20 +28,19 @@ class FoodTest extends BaseTest {
         driver.findElement(By.id("com.outfit7.talkingtom:id/foodButton")).click();
 
         // Wait for animation to end
-        Thread.sleep(500);
+        Thread.sleep(1000);
 
         // Click on milk
         driver.findElement(By.id("com.outfit7.talkingtom:id/foodItemMilk")).click();
 
-        // Wait for animation to end
+        // Wait for animation
         Thread.sleep(2000);
 
         // Save image of Tom eating
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File(String.format("%1$sTomDrinkingMilk.jpg", this.currentRunFolder)));
 
-        // Wait for animation to end
-        Thread.sleep(5000);
+        driver.findElement(By.id("com.outfit7.talkingtom:id/foodButton"));
 
         System.out.println("### Tom is feed! ###");
     }
@@ -52,14 +51,8 @@ class FoodTest extends BaseTest {
         // Click on info button
         driver.findElement(By.id("com.outfit7.talkingtom:id/buttonInfo")).click();
 
-        // Wait for animation to end
-        Thread.sleep(2000);
-
         // Click on how to play
         driver.findElement(By.id("com.outfit7.talkingtom:id/infoWebButtonHowToPlay")).click();
-
-        // Wait for animation to end
-        Thread.sleep(2000);
 
         // Get all bullet points
         MobileElement bulletsParent = driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.ViewFlipper/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/android.webkit.WebView/android.webkit.WebView/android.widget.ListView"));
@@ -67,14 +60,15 @@ class FoodTest extends BaseTest {
 
         // Get text of first bullet point
         MobileElement firstBullet = howToPlayBullets.get(0);
-        System.out.println(firstBullet.getText());
         // Assert the text of the first bullet point
         assertEquals(firstBullet.getText(), "Talk to Tom and he repeats with a funny voice");
 
         // Close the info window
         driver.findElement(By.id("com.outfit7.talkingtom:id/infoWebButtonClose")).click();
 
-        System.out.println("### First bullet output ###");
+        driver.findElement(By.id("com.outfit7.talkingtom:id/foodButton"));
+
+        System.out.println("### We know 'How to play'! ###");
     }
 
 
@@ -104,14 +98,14 @@ class FoodTest extends BaseTest {
         // Play recorded video
         driver.findElement(By.id("com.outfit7.talkingtom:id/recorderMenuButtonPlay")).click();
 
-        // Wait for animation to end
+        // Wait for first screenshot
         Thread.sleep(1500);
 
         // Save image of Tom for gasmask action
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File(String.format("%1$sTomGasMask.jpg", this.currentRunFolder)));
 
-        // Wait for animation to end
+        // Wait for second screenshot
         Thread.sleep(3500);
 
         // Save image of Tom for pawn action
@@ -123,5 +117,9 @@ class FoodTest extends BaseTest {
 
         // Close record window
         driver.findElement(By.id("com.outfit7.talkingtom:id/recorderMenuButtonClose")).click();
+
+        driver.findElement(By.id("com.outfit7.talkingtom:id/foodButton"));
+
+        System.out.println("### Video of Tom playing ended! ###");
     }
 }

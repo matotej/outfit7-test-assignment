@@ -40,7 +40,7 @@ class BaseTest {
         driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 
         // Default appium timeout for searching elements
-        driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS);
     }
 
     private void prepareState() throws InterruptedException, IOException, NotFoundException {
